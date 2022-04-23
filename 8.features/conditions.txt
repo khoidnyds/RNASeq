@@ -1,7 +1,0 @@
-,condition
-Mixed_1,mixed
-Mixed_2,mixed
-Lymphoblastic_1,lymphoblastic
-Lymphoblastic_2,lymphoblastic
-Myeloid_1,myeloid
-Myeloid_2,myeloid
