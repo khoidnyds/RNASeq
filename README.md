@@ -16,8 +16,6 @@ Reference genomes: Human GRCh38.p14
 
 ## Set-up
 - data/
-    - SRR14689338_mixed.fastq
-    - SRR14689339_mixed.fastq
     - SRR14689340_lymphoblastic.fastq
     - SRR14689341_lymphoblastic.fastq
     - SRR14689344_myeloid.fastq
@@ -25,7 +23,7 @@ Reference genomes: Human GRCh38.p14
     - GCF_000001405.40_GRCh38.p14_genomic.gtf
     - GCF_000001405.40_GRCh38.p14_genomic.fna
 - run.sh
-- bio.r
+- deseq2.r
 ## Tools: 
 sratoolskit, fastqc, multiqc, catadapt, bowtie2, samtools, tophat, deseq2
 
