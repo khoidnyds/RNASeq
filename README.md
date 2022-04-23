@@ -38,8 +38,26 @@ chmod +x run.sh
 
 or submit run.sh to Job Scheduler
 ## Results:
-* **1.multiqc_raw_data.pdf**: report for quality of RNA-Seq raw data
-* **2.multiqc_clean_data.pdf**: report for quality of RNA-Seq data after cleaning
-* **3.multiqc_featuresCount.pdf**: report for genes counting
-* **features_matrix.txt**: gene counts for each sample
-* **conditions.txt**: condition of each sample
+1. Preprocessing: (run.sh) 
+    * **1.multiqc_raw_data.pdf**: report for quality of RNA-Seq raw data
+    * **2.multiqc_clean_data.pdf**: report for quality of RNA-Seq data after cleaning
+    * **3.multiqc_tophat.pdf**: report for genes mapping
+    * **4.multiqc_featuresCount.pdf**: report for genes counting
+    * **features_matrix.txt**: gene counts for each sample
+    * **conditions.txt**: condition of each sample
+2. Differential gene expression analysis: (deseq2.r)
+    * **5.MA_plot.pdf**: MA plot
+    * **5.MA_plot_shrunken.pdf**: MA plot for shrunken log2 fold changes
+    * **6.heatmap_count_ntd.pdf**: Heatmap of gene counts with Normalized Transformation
+    * **6.heatmap_count_rlog.pdf**: Heatmap of gene counts with Regularized Logarithm Transformation
+    * **6.heatmap_count_vst.pdf**: Heatmap of gene counts with Variance Stabilizing Transformation
+    * **6.heatmap_sample_distance.pdf**: Heatmap of sample-to-sample distance
+    * **7.PCA_samples.pdf**: Principle component plot of the samples
+    * **8.gene_counts.pdf**: Plot counts of a specific gene
+    * **lymph_myelo_results.csv**: Full report of differential expression analysis
+    * **lymph_myelo_results_sig.csv**: Full report of differential expression analysis after apply pvalue cutoff of 0.05 and log2FoldChange of 4
+    * **DE_genes.txt**: List of significant differential expression genes
+3. Pathway analysis: (DAVID)
+    * **9.DAVID_report.pdf**: Report from DAVID for the DE_genes.txt
+    * **9.DAVID_KEGG_pathway.pdf**: Possible pathways from KEGG
+    * **9.DAVID_reactome_pathway.pdf**: Possible pathways from reactome

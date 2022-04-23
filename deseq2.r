@@ -3,7 +3,7 @@
 # MA-plot
 # PCA plot, 
 # heatmap for the DE genes and 
-# ggplot to display any gene expression level (DESeq2 vignette will be helpful)
+# ggplot to display any gene expression level 
 
 
 library(DESeq2)
