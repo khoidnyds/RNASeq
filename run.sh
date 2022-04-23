@@ -85,8 +85,8 @@ samtools sort -@ $THREADS -n -o $MYELOID_2_SORT 6.tophat2/myeloid_2/accepted_hit
 
 # STEP 4. COUNTING: Count reads for each gene based on the sorted bam files, minimum mapping quality is 10,
 mkdir 9.features
-featureCounts -Q 10 -t exon -g gene_id -T $THREADS -a $ANNO -o $FEATURES_COUNT $MIXED_1_SORT $MIXED_2_SORT $LYMPHOBLASTIC_1_SORT $LYMPHOBLASTIC_2_SORT $MYELOID_1_SORT $MYELOID_2_SORT
-awk -F'\t' '{ print $1,"\t",$7,"\t",$8,"\t",$9,"\t",$10,"\t",$11,"\t",$12 }' $FEATURES_COUNT > $FEATURES_MATRIX
+featureCounts -Q 10 -t exon -g gene_id -T $THREADS -a $ANNO -o $FEATURES_COUNT $LYMPHOBLASTIC_1_SORT $LYMPHOBLASTIC_2_SORT $MYELOID_1_SORT $MYELOID_2_SORT
+awk -F'\t' '{ print $1,"\t",$7,"\t",$8,"\t",$9,"\t",$10}' $FEATURES_COUNT > $FEATURES_MATRIX
 multiqc 9.features -f -o 10.multiqc
 
 

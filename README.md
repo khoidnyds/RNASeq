@@ -38,7 +38,8 @@ chmod +x run.sh
 
 or submit run.sh to Job Scheduler
 ## Results:
-* **2.multiqc**: report for RNA-Seq raw data
-* **4.multiqc**: report for RNA-Seq data after cleaning
-* **8.features/features_matrix.txt**: gene counts for each sample
-* **8.features/conditions.txt**: condition of each sample
+* **1.multiqc_raw_data.pdf**: report for quality of RNA-Seq raw data
+* **2.multiqc_clean_data.pdf**: report for quality of RNA-Seq data after cleaning
+* **3.multiqc_featuresCount.pdf**: report for genes counting
+* **features_matrix.txt**: gene counts for each sample
+* **conditions.txt**: condition of each sample
