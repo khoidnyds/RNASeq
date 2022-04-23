@@ -9,7 +9,6 @@ export PATH=/home/khoidnyds/RNAseq_old/tools/bowtie2-2.4.5:$PATH
 export PATH=/home/khoidnyds/RNAseq_old/tools/tophat-2.1.1:$PATH
 
 export THREADS=32
-# fasterq-dump --outdir data --mem 10G --split-3 --threads $THREADS --skip-technical  --print-read-nr SRR14689338 SRR14689339 SRR14689340 SRR14689341 SRR14689344 SRR14689345
 
 export REF="data/GCF_000001405.40_GRCh38.p14_genomic.fna"
 export REF_BUILD="5.bowtie2/REF_GENOME"
@@ -29,15 +28,19 @@ export LYMPHOBLASTIC_2_CLEAN="3.cutadapt/SRR14689341_lymphoblastic_clean.fastq"
 export MYELOID_1_CLEAN="3.cutadapt/SRR14689344_myeloid_clean.fastq"
 export MYELOID_2_CLEAN="3.cutadapt/SRR14689345_myeloid_clean.fastq"
 
-export MIXED_1_SORT="7.samtools/SRR14689338_mixed.bam"
-export MIXED_2_SORT="7.samtools/SRR14689339_mixed.bam"
-export LYMPHOBLASTIC_1_SORT="7.samtools/SRR14689340_lymphoblastic.bam"
-export LYMPHOBLASTIC_2_SORT="7.samtools/SRR14689341_lymphoblastic.bam"
-export MYELOID_1_SORT="7.samtools/SRR14689344_myeloid.bam"
-export MYELOID_2_SORT="7.samtools/SRR14689345_myeloid.bam"
+export MIXED_1_SORT="8.samtools/SRR14689338_mixed.bam"
+export MIXED_2_SORT="8.samtools/SRR14689339_mixed.bam"
+export LYMPHOBLASTIC_1_SORT="8.samtools/SRR14689340_lymphoblastic.bam"
+export LYMPHOBLASTIC_2_SORT="8.samtools/SRR14689341_lymphoblastic.bam"
+export MYELOID_1_SORT="8.samtools/SRR14689344_myeloid.bam"
+export MYELOID_2_SORT="8.samtools/SRR14689345_myeloid.bam"
 
-export FEATURES_COUNT="8.features/features_count.txt"
-export FEATURES_MATRIX="8.features/features_matrix.txt"
+export FEATURES_COUNT="9.features/features_count.txt"
+export FEATURES_MATRIX="9.features/features_matrix.txt"
+
+# STEP 0: GET DATA: from SRA
+fasterq-dump --outdir data --mem 10G --split-3 --threads $THREADS --skip-technical --print-read-nr SRR14689338 SRR14689339 SRR14689340 SRR14689341 SRR14689344 SRR14689345
+
 
 # STEP 1. QUALITY CONTROL: remove reads being shorter than 20 nucleotides, reads having quality score smaller than 20
 mkdir 1.fastqc
@@ -67,10 +70,11 @@ tophat2 -o 6.tophat2/lymphoblastic_1 --num-threads $THREADS --segment-length 18 
 tophat2 -o 6.tophat2/lymphoblastic_2 --num-threads $THREADS --segment-length 18 --no-coverage-search --mate-inner-dist 200 $REF_BUILD $LYMPHOBLASTIC_2_CLEAN
 tophat2 -o 6.tophat2/myeloid_1 --num-threads $THREADS --segment-length 18 --no-coverage-search --mate-inner-dist 200 $REF_BUILD $MYELOID_1_CLEAN
 tophat2 -o 6.tophat2/myeloid_2 --num-threads $THREADS --segment-length 18 --no-coverage-search --mate-inner-dist 200 $REF_BUILD $MYELOID_2_CLEAN
+multiqc 6.tophat2 -f -o 7.multiqc
 
 
 # STEP 3. SORTING: Sort alignment file by read name.
-mkdir 7.samtools
+mkdir 8.samtools
 samtools sort -@ $THREADS -n -o $MIXED_1_SORT  6.tophat2/mix_1/accepted_hits.bam
 samtools sort -@ $THREADS -n -o $MIXED_2_SORT  6.tophat2/mix_2/accepted_hits.bam
 samtools sort -@ $THREADS -n -o $LYMPHOBLASTIC_1_SORT 6.tophat2/lymphoblastic_1/accepted_hits.bam
@@ -78,14 +82,17 @@ samtools sort -@ $THREADS -n -o $LYMPHOBLASTIC_2_SORT 6.tophat2/lymphoblastic_2/
 samtools sort -@ $THREADS -n -o $MYELOID_1_SORT 6.tophat2/myeloid_1/accepted_hits.bam
 samtools sort -@ $THREADS -n -o $MYELOID_2_SORT 6.tophat2/myeloid_2/accepted_hits.bam
 
+
 # STEP 4. COUNTING: Count reads for each gene based on the sorted bam files, minimum mapping quality is 10,
-mkdir 8.features
+mkdir 9.features
 featureCounts -Q 10 -t exon -g gene_id -T $THREADS -a $ANNO -o $FEATURES_COUNT $MIXED_1_SORT $MIXED_2_SORT $LYMPHOBLASTIC_1_SORT $LYMPHOBLASTIC_2_SORT $MYELOID_1_SORT $MYELOID_2_SORT
 awk -F'\t' '{ print $1,"\t",$7,"\t",$8,"\t",$9,"\t",$10,"\t",$11,"\t",$12 }' $FEATURES_COUNT > $FEATURES_MATRIX
-multiqc 8.features -f -o 9.multiqc
+multiqc 9.features -f -o 10.multiqc
 
-# STEP 5. Differential expression analysis (DE): the input is features_matrix.txt and conditions.txt
+
+# STEP 5. DIFFERENTIAL EXPRESSION ANALYSIS: the input is features_matrix.txt and conditions.txt
 Rscript deseq2.r
 
-# STEP 6. Use web-based pathway analysis (https://david.ncifcrf.gov/tools.jsp) and find possible biological pathways that related to the DE genes.
+
+# STEP 6. PATHWAY ANALYSIS (https://david.ncifcrf.gov/tools.jsp) and find possible biological pathways that related to the DE genes.
 # Attached images

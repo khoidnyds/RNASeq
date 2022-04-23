@@ -1,0 +1,7 @@
+,condition
+Mixed_1,mixed
+Mixed_2,mixed
+Lymph_1,lymph
+Lymph_2,lymph
+Myelo_1,myelo
+Myelo_2,myelo
