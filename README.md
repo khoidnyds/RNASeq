@@ -37,7 +37,7 @@ data/
 
 
 ## Tools: 
-fastqc, multiqc, bowtie2, tophat, deseq2
+sratoolskit, fastqc, multiqc, catadapt, bowtie2, samtools, tophat, deseq2
 
 ## Usage:
 ```
