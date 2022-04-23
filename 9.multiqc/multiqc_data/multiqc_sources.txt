@@ -1,4 +1,0 @@
-Module	Section	Sample Name	Source
-featureCounts	all_sections	SRR14689338_mixed	/home/khoidnyds/RNAseq_old/8.features/features_count.txt.summary
-featureCounts	all_sections	SRR14689339_mixed	/home/khoidnyds/RNAseq_old/8.features/features_count.txt.summary
-featureCounts	all_sections	SRR14689340_lymphoblastic	/home/khoidnyds/RNAseq_old/8.features/features_count.txt.summary

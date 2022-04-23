@@ -1,4 +1,0 @@
-Sample	featureCounts_mqc-generalstats-featurecounts-percent_assigned	featureCounts_mqc-generalstats-featurecounts-Assigned
-SRR14689338_mixed	61.03504567520057	7387580
-SRR14689339_mixed	59.2013421163574	8185486
-SRR14689340_lymphoblastic	59.522038225987416	8172083

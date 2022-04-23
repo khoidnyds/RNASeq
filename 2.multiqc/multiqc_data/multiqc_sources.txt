@@ -1,7 +1,0 @@
-Module	Section	Sample Name	Source
-FastQC	all_sections	SRR14689339_mixed	/home/khoidnyds/RNAseq_old/1.fastqc/SRR14689339_mixed_fastqc.zip
-FastQC	all_sections	SRR14689345_myeloid	/home/khoidnyds/RNAseq_old/1.fastqc/SRR14689345_myeloid_fastqc.zip
-FastQC	all_sections	SRR14689341_lymphoblastic	/home/khoidnyds/RNAseq_old/1.fastqc/SRR14689341_lymphoblastic_fastqc.zip
-FastQC	all_sections	SRR14689340_lymphoblastic	/home/khoidnyds/RNAseq_old/1.fastqc/SRR14689340_lymphoblastic_fastqc.zip
-FastQC	all_sections	SRR14689338_mixed	/home/khoidnyds/RNAseq_old/1.fastqc/SRR14689338_mixed_fastqc.zip
-FastQC	all_sections	SRR14689344_myeloid	/home/khoidnyds/RNAseq_old/1.fastqc/SRR14689344_myeloid_fastqc.zip
