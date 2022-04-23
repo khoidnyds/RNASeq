@@ -1,0 +1,239 @@
+{
+    "report_data_sources": {
+        "Cutadapt": {
+            "all_sections": {
+                "SRR14689340_lymphoblastic": "/home/khoidnyds/RNAseq_old/3.cutadapt/report_lymphoblastic_1.txt",
+                "SRR14689339_mixed": "/home/khoidnyds/RNAseq_old/3.cutadapt/report_mix_2.txt",
+                "SRR14689344_myeloid": "/home/khoidnyds/RNAseq_old/3.cutadapt/report_myeloid_1.txt",
+                "SRR14689341_lymphoblastic": "/home/khoidnyds/RNAseq_old/3.cutadapt/report_lymphoblastic_2.txt",
+                "SRR14689345_myeloid": "/home/khoidnyds/RNAseq_old/3.cutadapt/report_myeloid_2.txt",
+                "SRR14689338_mixed": "/home/khoidnyds/RNAseq_old/3.cutadapt/report_mix_1.txt"
+            }
+        }
+    },
+    "report_general_stats_data": [
+        {
+            "SRR14689340_lymphoblastic": {
+                "cutadapt_version": "4.0",
+                "r_processed": 12721775,
+                "r_too_short": 0,
+                "r_written": 12721775,
+                "bp_processed": 1284455462,
+                "quality_trimmed": 87911,
+                "bp_written": 1284367551,
+                "percent_trimmed": 0.006844223299351738
+            },
+            "SRR14689339_mixed": {
+                "cutadapt_version": "4.0",
+                "r_processed": 12780932,
+                "r_too_short": 0,
+                "r_written": 12780932,
+                "bp_processed": 1290415246,
+                "quality_trimmed": 83263,
+                "bp_written": 1290331983,
+                "percent_trimmed": 0.00645241911532716
+            },
+            "SRR14689344_myeloid": {
+                "cutadapt_version": "4.0",
+                "r_processed": 12975573,
+                "r_too_short": 0,
+                "r_written": 12975573,
+                "bp_processed": 1310036988,
+                "quality_trimmed": 83049,
+                "bp_written": 1309953939,
+                "percent_trimmed": 0.0063394393258154325
+            },
+            "SRR14689341_lymphoblastic": {
+                "cutadapt_version": "4.0",
+                "r_processed": 13629305,
+                "r_too_short": 0,
+                "r_written": 13629305,
+                "bp_processed": 1376086539,
+                "quality_trimmed": 109141,
+                "bp_written": 1375977398,
+                "percent_trimmed": 0.007931259910391435
+            },
+            "SRR14689345_myeloid": {
+                "cutadapt_version": "4.0",
+                "r_processed": 12965130,
+                "r_too_short": 0,
+                "r_written": 12965130,
+                "bp_processed": 1308999645,
+                "quality_trimmed": 68400,
+                "bp_written": 1308931245,
+                "percent_trimmed": 0.005225364289537298
+            },
+            "SRR14689338_mixed": {
+                "cutadapt_version": "4.0",
+                "r_processed": 11166235,
+                "r_too_short": 0,
+                "r_written": 11166235,
+                "bp_processed": 1127376633,
+                "quality_trimmed": 54549,
+                "bp_written": 1127322084,
+                "percent_trimmed": 0.004838578200334227
+            }
+        }
+    ],
+    "report_general_stats_headers": [
+        {
+            "percent_trimmed": {
+                "title": "% BP Trimmed",
+                "description": "% Total Base Pairs trimmed",
+                "max": 100,
+                "min": 0,
+                "suffix": "%",
+                "scale": "RdYlBu-rev",
+                "namespace": "Cutadapt",
+                "rid": "mqc-generalstats-cutadapt-percent_trimmed",
+                "format": "{:,.1f}",
+                "colour": "55,126,184",
+                "hidden": null,
+                "ceiling": null,
+                "floor": null,
+                "minRange": null,
+                "shared_key": null,
+                "modify": null,
+                "placement": 1000.0,
+                "dmax": 100.0,
+                "dmin": 0.0
+            }
+        }
+    ],
+    "report_multiqc_command": "/home/khoidnyds/miniconda3/envs/bio_tophat/bin/multiqc 3.cutadapt -f -o 4.multiqc",
+    "report_plot_data": {
+        "cutadapt_filtered_reads_plot": {
+            "plot_type": "bar_graph",
+            "samples": [
+                [
+                    "SRR14689338_mixed",
+                    "SRR14689339_mixed",
+                    "SRR14689340_lymphoblastic",
+                    "SRR14689341_lymphoblastic",
+                    "SRR14689344_myeloid",
+                    "SRR14689345_myeloid"
+                ]
+            ],
+            "datasets": [
+                [
+                    {
+                        "name": "Reads passing filters",
+                        "data": [
+                            11166235.0,
+                            12780932.0,
+                            12721775.0,
+                            13629305.0,
+                            12975573.0,
+                            12965130.0
+                        ]
+                    }
+                ]
+            ],
+            "config": {
+                "id": "cutadapt_filtered_reads_plot",
+                "title": "Cutadapt: Filtered Reads",
+                "ylab": "Counts"
+            }
+        }
+    },
+    "report_saved_raw_data": {
+        "multiqc_cutadapt": {
+            "SRR14689340_lymphoblastic": {
+                "cutadapt_version": "4.0",
+                "r_processed": 12721775,
+                "r_too_short": 0,
+                "r_written": 12721775,
+                "bp_processed": 1284455462,
+                "quality_trimmed": 87911,
+                "bp_written": 1284367551,
+                "percent_trimmed": 0.006844223299351738
+            },
+            "SRR14689339_mixed": {
+                "cutadapt_version": "4.0",
+                "r_processed": 12780932,
+                "r_too_short": 0,
+                "r_written": 12780932,
+                "bp_processed": 1290415246,
+                "quality_trimmed": 83263,
+                "bp_written": 1290331983,
+                "percent_trimmed": 0.00645241911532716
+            },
+            "SRR14689344_myeloid": {
+                "cutadapt_version": "4.0",
+                "r_processed": 12975573,
+                "r_too_short": 0,
+                "r_written": 12975573,
+                "bp_processed": 1310036988,
+                "quality_trimmed": 83049,
+                "bp_written": 1309953939,
+                "percent_trimmed": 0.0063394393258154325
+            },
+            "SRR14689341_lymphoblastic": {
+                "cutadapt_version": "4.0",
+                "r_processed": 13629305,
+                "r_too_short": 0,
+                "r_written": 13629305,
+                "bp_processed": 1376086539,
+                "quality_trimmed": 109141,
+                "bp_written": 1375977398,
+                "percent_trimmed": 0.007931259910391435
+            },
+            "SRR14689345_myeloid": {
+                "cutadapt_version": "4.0",
+                "r_processed": 12965130,
+                "r_too_short": 0,
+                "r_written": 12965130,
+                "bp_processed": 1308999645,
+                "quality_trimmed": 68400,
+                "bp_written": 1308931245,
+                "percent_trimmed": 0.005225364289537298
+            },
+            "SRR14689338_mixed": {
+                "cutadapt_version": "4.0",
+                "r_processed": 11166235,
+                "r_too_short": 0,
+                "r_written": 11166235,
+                "bp_processed": 1127376633,
+                "quality_trimmed": 54549,
+                "bp_written": 1127322084,
+                "percent_trimmed": 0.004838578200334227
+            }
+        },
+        "multiqc_general_stats": {
+            "SRR14689340_lymphoblastic": {
+                "Cutadapt_mqc-generalstats-cutadapt-percent_trimmed": 0.006844223299351738
+            },
+            "SRR14689339_mixed": {
+                "Cutadapt_mqc-generalstats-cutadapt-percent_trimmed": 0.00645241911532716
+            },
+            "SRR14689344_myeloid": {
+                "Cutadapt_mqc-generalstats-cutadapt-percent_trimmed": 0.0063394393258154325
+            },
+            "SRR14689341_lymphoblastic": {
+                "Cutadapt_mqc-generalstats-cutadapt-percent_trimmed": 0.007931259910391435
+            },
+            "SRR14689345_myeloid": {
+                "Cutadapt_mqc-generalstats-cutadapt-percent_trimmed": 0.005225364289537298
+            },
+            "SRR14689338_mixed": {
+                "Cutadapt_mqc-generalstats-cutadapt-percent_trimmed": 0.004838578200334227
+            }
+        }
+    },
+    "config_analysis_dir_abs": [
+        "/home/khoidnyds/RNAseq_old/3.cutadapt"
+    ],
+    "config_analysis_dir": [
+        "3.cutadapt"
+    ],
+    "config_creation_date": "2022-04-22, 20:36",
+    "config_git_hash": null,
+    "config_intro_text": null,
+    "config_report_comment": null,
+    "config_report_header_info": null,
+    "config_script_path": "/home/khoidnyds/miniconda3/envs/bio_tophat/lib/python3.9/site-packages/multiqc/utils",
+    "config_short_version": "1.12",
+    "config_subtitle": null,
+    "config_title": null,
+    "config_version": "1.12"
+}

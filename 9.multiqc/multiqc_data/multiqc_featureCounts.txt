@@ -1,0 +1,4 @@
+Sample	Total	Assigned	Unassigned_Unmapped	Unassigned_Read_Type	Unassigned_Singleton	Unassigned_MappingQuality	Unassigned_Chimera	Unassigned_FragmentLength	Unassigned_Duplicate	Unassigned_MultiMapping	Unassigned_Secondary	Unassigned_NonSplit	Unassigned_NoFeatures	Unassigned_Overlapping_Length	Unassigned_Ambiguity	percent_assigned
+SRR14689338_mixed	12103833	7387580	0	0	0	2291184	0	0	0	0	0	0	2111621	0	313448	61.03504567520057
+SRR14689339_mixed	13826521	8185486	0	0	0	2543835	0	0	0	0	0	0	2745878	0	351322	59.2013421163574
+SRR14689340_lymphoblastic	13729508	8172083	0	0	0	2444589	0	0	0	0	0	0	2744839	0	367997	59.522038225987416

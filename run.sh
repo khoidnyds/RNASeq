@@ -36,33 +36,29 @@ export LYMPHOBLASTIC_2_SORT="7.samtools/SRR14689341_lymphoblastic.bam"
 export MYELOID_1_SORT="7.samtools/SRR14689344_myeloid.bam"
 export MYELOID_2_SORT="7.samtools/SRR14689345_myeloid.bam"
 
-export MIXED_1_FC="8.features/mixed_1.txt"
-export MIXED_2_FC="8.features/mixed_2.txt"
-export LYMPHOBLASTIC_1_FC="8.features/lymphoblastic_1.txt"
-export LYMPHOBLASTIC_2_FC="8.features/lymphoblastic_2.txt"
-export MYELOID_1_FC="8.features/myeloid_1.txt"
-export MYELOID_2_FC="8.features/myeloid_2.txt"
+export FEATURES_COUNT="8.features/features_count.txt"
+export FEATURES_MATRIX="8.features/features_matrix.txt"
 
 # STEP 1. QUALITY CONTROL: remove reads being shorter than 20 nucleotides, reads having quality score smaller than 20
-# mkdir 1.fastqc
-# fastqc -t 32 data/*.fastq* -o 1.fastqc
-# multiqc 1.fastqc -f -o 2.multiqc
+mkdir 1.fastqc
+fastqc -t 32 data/*.fastq* -o 1.fastqc
+multiqc 1.fastqc -f -o 2.multiqc
 
-# mkdir 3.cutadapt
-# cutadapt --cores=0 --minimum-length 20 --quality-cutoff 20 -o $MIXED_1_CLEAN $MIXED_1 > 3.cutadapt/report_mix_1.txt
-# cutadapt --cores=0 --minimum-length 20 --quality-cutoff 20 -o $MIXED_2_CLEAN $MIXED_2 > 3.cutadapt/report_mix_2.txt
-# cutadapt --cores=0 --minimum-length 20 --quality-cutoff 20 -o $LYMPHOBLASTIC_1_CLEAN $LYMPHOBLASTIC_1 > 3.cutadapt/report_lymphoblastic_1.txt
-# cutadapt --cores=0 --minimum-length 20 --quality-cutoff 20 -o $LYMPHOBLASTIC_2_CLEAN $LYMPHOBLASTIC_2 > 3.cutadapt/report_lymphoblastic_2.txt
-# cutadapt --cores=0 --minimum-length 20 --quality-cutoff 20 -o $MYELOID_1_CLEAN $MYELOID_1 > 3.cutadapt/report_myeloid_1.txt
-# cutadapt --cores=0 --minimum-length 20 --quality-cutoff 20 -o $MYELOID_2_CLEAN $MYELOID_2 > 3.cutadapt/report_myeloid_2.txt
-# multiqc 3.cutadapt -f -o 4.multiqc
+mkdir 3.cutadapt
+cutadapt --cores=0 --minimum-length 20 --quality-cutoff 20 -o $MIXED_1_CLEAN $MIXED_1 > 3.cutadapt/report_mix_1.txt
+cutadapt --cores=0 --minimum-length 20 --quality-cutoff 20 -o $MIXED_2_CLEAN $MIXED_2 > 3.cutadapt/report_mix_2.txt
+cutadapt --cores=0 --minimum-length 20 --quality-cutoff 20 -o $LYMPHOBLASTIC_1_CLEAN $LYMPHOBLASTIC_1 > 3.cutadapt/report_lymphoblastic_1.txt
+cutadapt --cores=0 --minimum-length 20 --quality-cutoff 20 -o $LYMPHOBLASTIC_2_CLEAN $LYMPHOBLASTIC_2 > 3.cutadapt/report_lymphoblastic_2.txt
+cutadapt --cores=0 --minimum-length 20 --quality-cutoff 20 -o $MYELOID_1_CLEAN $MYELOID_1 > 3.cutadapt/report_myeloid_1.txt
+cutadapt --cores=0 --minimum-length 20 --quality-cutoff 20 -o $MYELOID_2_CLEAN $MYELOID_2 > 3.cutadapt/report_myeloid_2.txt
+multiqc 3.cutadapt -f -o 4.multiqc
 
 
 # STEP 2. MAPPING: minimum length of segments of read is 18, disable coverage search for junctions,
-# mkdir 5.bowtie2
-# bowtie2-build $REF $REF_BUILD --threads $THREADS
-# cp $REF 5.bowtie2
-# mv 5.bowtie2/GCF_000001405.40_GRCh38.p14_genomic.fna 5.bowtie2/REF_GENOME.fa
+mkdir 5.bowtie2
+bowtie2-build $REF $REF_BUILD --threads $THREADS
+cp $REF 5.bowtie2
+mv 5.bowtie2/GCF_000001405.40_GRCh38.p14_genomic.fna 5.bowtie2/REF_GENOME.fa
 
 mkdir 6.tophat2
 tophat2 -o 6.tophat2/mix_1 --num-threads $THREADS --segment-length 18 --no-coverage-search --mate-inner-dist 200 $REF_BUILD $MIXED_1_CLEAN
@@ -73,37 +69,23 @@ tophat2 -o 6.tophat2/myeloid_1 --num-threads $THREADS --segment-length 18 --no-c
 tophat2 -o 6.tophat2/myeloid_2 --num-threads $THREADS --segment-length 18 --no-coverage-search --mate-inner-dist 200 $REF_BUILD $MYELOID_2_CLEAN
 
 
-# STEP 3. SORTING
-# mkdir 7.samtools
-# samtools sort -n -o $MIXED_1_SORT -@ $THREADS 6.tophat2/mix_1/accepted_hits.bam
-# samtools index $MIXED_1_SORT
-# samtools sort -n -o $MIXED_2_SORT -@ $THREADS 6.tophat2/mix_2/accepted_hits.bam
-# samtools index $MIXED_2_SORT
-# samtools sort -n -o $LYMPHOBLASTIC_1_SORT -@ $THREADS 6.tophat2/lymphoblastic_1/accepted_hits.bam
-# samtools index $LYMPHOBLASTIC_1_SORT
-# samtools sort -n -o $LYMPHOBLASTIC_2_SORT -@ $THREADS 6.tophat2/lymphoblastic_2/accepted_hits.bam
-# samtools index $LYMPHOBLASTIC_2_SORT
-# samtools sort -n -o $MYELOID_1_SORT -@ $THREADS 6.tophat2/myeloid_1/accepted_hits.bam
-# samtools index $MYELOID_1_SORT
-# samtools sort -n -o $MYELOID_2_SORT -@ $THREADS 6.tophat2/myeloid_2/accepted_hits.bam
-# samtools index $MYELOID_2_SORT
+# STEP 3. SORTING: Sort alignment file by read name.
+mkdir 7.samtools
+samtools sort -@ $THREADS -n -o $MIXED_1_SORT  6.tophat2/mix_1/accepted_hits.bam
+samtools sort -@ $THREADS -n -o $MIXED_2_SORT  6.tophat2/mix_2/accepted_hits.bam
+samtools sort -@ $THREADS -n -o $LYMPHOBLASTIC_1_SORT 6.tophat2/lymphoblastic_1/accepted_hits.bam
+samtools sort -@ $THREADS -n -o $LYMPHOBLASTIC_2_SORT 6.tophat2/lymphoblastic_2/accepted_hits.bam
+samtools sort -@ $THREADS -n -o $MYELOID_1_SORT 6.tophat2/myeloid_1/accepted_hits.bam
+samtools sort -@ $THREADS -n -o $MYELOID_2_SORT 6.tophat2/myeloid_2/accepted_hits.bam
 
-# STEP 4. COUNTING: Count reads for each gene based on the sorted bam files
-# mkdir 8.features
-# featureCounts -t exon -g gene_id -T $THREADS -a $ANNO -o $MIXED_1_FC $MIXED_1_SORT
-# featureCounts -t exon -g gene_id -T $THREADS -a $ANNO -o $MIXED_2_FC $MIXED_2_SORT
-# featureCounts -t exon -g gene_id -T $THREADS -a $ANNO -o $LYMPHOBLASTIC_1_FC $LYMPHOBLASTIC_1_SORT
-# featureCounts -t exon -g gene_id -T $THREADS -a $ANNO -o $LYMPHOBLASTIC_2_FC $LYMPHOBLASTIC_2_SORT
-# featureCounts -t exon -g gene_id -T $THREADS -a $ANNO -o $MYELOID_1_FC $MYELOID_1_SORT
-# featureCounts -t exon -g gene_id -T $THREADS -a $ANNO -o $MYELOID_2_FC $MYELOID_2_SORT
+# STEP 4. COUNTING: Count reads for each gene based on the sorted bam files, minimum mapping quality is 10,
+mkdir 8.features
+featureCounts -Q 10 -t exon -g gene_id -T $THREADS -a $ANNO -o $FEATURES_COUNT $MIXED_1_SORT $MIXED_2_SORT $LYMPHOBLASTIC_1_SORT $LYMPHOBLASTIC_2_SORT $MYELOID_1_SORT $MYELOID_2_SORT
+awk -F'\t' '{ print $1,"\t",$7,"\t",$8,"\t",$9,"\t",$10,"\t",$11,"\t",$12 }' $FEATURES_COUNT > $FEATURES_MATRIX
+multiqc 8.features -f -o 9.multiqc
 
-
-# STEP 5. Differential expression analysis (DE) can be done by using a R package: DESeq2. (https://www.r-project.org/, https://www.rstudio.com/products/rstudio/, and https://www.bioconductor.org/packages/release/bioc/html/DESeq2.html). Try to describe the codes from the DESeq2 to generate different expressed gene list, MA-plot, PCA plot, heatmap for the DE genes and ggplot to display any gene expression level (DESeq2 vignette will be helpful).
-# Differential expression genes
-# mkdir 6.countReadPerGene
-# htseq-count -t exon -i gene_id -f bam $F77_BAM $F78_BAM $F80_BAM $F81_BAM $ANNO > 6.countReadPerGene/readCount_raw.txt
-# multiqc 6.countReadPerGene -f -o 7.multiqc
-# head -n -5 6.countReadPerGene/readCount_raw.txt > 6.countReadPerGene/readCount.txt
-# Rscript deseq2.r
+# STEP 5. Differential expression analysis (DE): the input is features_matrix.txt and conditions.txt
+Rscript deseq2.r
 
 # STEP 6. Use web-based pathway analysis (https://david.ncifcrf.gov/tools.jsp) and find possible biological pathways that related to the DE genes.
+# Attached images
